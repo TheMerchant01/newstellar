@@ -42,7 +42,7 @@ async function seedDatabase() {
         firstName: "Admin",
         lastName: "User",
         userName: "admin",
-        email: "admin@stellaroneholdings.com",
+        email: "admin@stellarone-holdings.com",
         password: hashedPassword,
         dateOfBirth: new Date("1990-01-01"),
         phoneNumber: "+1234567890",

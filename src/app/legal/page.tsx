@@ -198,7 +198,7 @@ export default function LegalPage() {
                     <strong>Phone:</strong> (555) 123-BANK
                   </li>
                   <li>
-                    <strong>Email:</strong> legal@stellaroneholdings.com
+                    <strong>Email:</strong> legal@stellarone-holdings.com
                   </li>
                   <li>
                     <strong>Address:</strong> 123 Financial District, New York,

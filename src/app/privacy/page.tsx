@@ -232,7 +232,7 @@ export default function PrivacyPage() {
                 </p>
                 <ul className="text-gray-600 space-y-2">
                   <li>
-                    <strong>Email:</strong> privacy@stellaroneholdings.com
+                    <strong>Email:</strong> privacy@stellarone-holdings.com
                   </li>
                   <li>
                     <strong>Phone:</strong> (555) 123-BANK

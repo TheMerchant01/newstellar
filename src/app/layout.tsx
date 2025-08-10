@@ -37,14 +37,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://stellaroneholdings.com"),
+  metadataBase: new URL("https://stellarone-holdings.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://stellaroneholdings.com",
+    url: "https://stellarone-holdings.com",
     title: "Stellar One Holdings",
     description:
       "Your trusted partner in modern banking and financial services",
