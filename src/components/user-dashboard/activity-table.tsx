@@ -92,6 +92,14 @@ interface Transaction {
     bankAddress: string;
     description: string;
   };
+  transferInDetails?: {
+    senderName: string;
+    senderAccountNumber: string;
+    senderBankName: string;
+    senderCountry: string;
+    referenceNumber: string;
+    description?: string;
+  };
 }
 
 interface ApiResponse {
@@ -139,6 +147,7 @@ const columns: ColumnDef<Transaction>[] = [
         CHEQUE_DEPOSIT: "bg-teal-500/10",
         WITHDRAWAL: "bg-rose-500/10",
         TRANSFER: "bg-violet-500/10",
+        TRANSFER_IN: "bg-green-500/10",
         PAYMENT: "bg-amber-500/10",
         LOAN_PAYMENT: "bg-indigo-500/10",
       };
@@ -148,6 +157,7 @@ const columns: ColumnDef<Transaction>[] = [
         CHEQUE_DEPOSIT: <Receipt className="h-4 w-4 text-teal-500" />,
         WITHDRAWAL: <CreditCard className="h-4 w-4 text-rose-500" />,
         TRANSFER: <ArrowRight className="h-4 w-4 text-violet-500" />,
+        TRANSFER_IN: <ArrowLeft className="h-4 w-4 text-green-500" />,
         PAYMENT: <Banknote className="h-4 w-4 text-amber-500" />,
         LOAN_PAYMENT: <Building2 className="h-4 w-4 text-indigo-600" />,
       };
@@ -180,6 +190,40 @@ const columns: ColumnDef<Transaction>[] = [
                   <span className="font-medium">{transaction.recipient}</span>
                 </span>
               ) : null}
+            </>
+          );
+          break;
+        case "TRANSFER_IN":
+          details = (
+            <>
+              {transaction.transferInDetails?.senderName ? (
+                <span>
+                  From:{" "}
+                  <span className="font-medium">
+                    {transaction.transferInDetails.senderName}
+                  </span>
+                  {transaction.transferInDetails.senderAccountNumber && (
+                    <span className="ml-1 text-[10px] text-muted-foreground">
+                      ({transaction.transferInDetails.senderAccountNumber})
+                    </span>
+                  )}
+                  {transaction.transferInDetails.senderBankName && (
+                    <span className="ml-1 text-[10px] text-muted-foreground">
+                      - {transaction.transferInDetails.senderBankName}
+                    </span>
+                  )}
+                </span>
+              ) : null}
+              {transaction.transferInDetails?.referenceNumber && (
+                <span className="block text-[10px] text-muted-foreground">
+                  Ref: {transaction.transferInDetails.referenceNumber}
+                </span>
+              )}
+              {transaction.transferInDetails?.description && (
+                <span className="block">
+                  {transaction.transferInDetails.description}
+                </span>
+              )}
             </>
           );
           break;
@@ -317,7 +361,14 @@ const columns: ColumnDef<Transaction>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const date = new Date(row.getValue("date"));
+      const dateValue = row.getValue("date");
+      const date = new Date(dateValue);
+
+      // Check if date is valid
+      if (isNaN(date.getTime())) {
+        return <div className="text-muted-foreground">Invalid Date</div>;
+      }
+
       return (
         <div>
           {date
@@ -356,13 +407,13 @@ const columns: ColumnDef<Transaction>[] = [
 
       const getAmountColor = (type: string, amount: number) => {
         if (type === "TRANSFER") return "text-rose-500";
-        if (amount > 0) return "text-emerald-500";
+        if (type === "TRANSFER_IN" || amount > 0) return "text-emerald-500";
         return "text-rose-500";
       };
 
       const getAmountSign = (type: string, amount: number) => {
         if (type === "TRANSFER") return "-";
-        if (amount > 0) return "+";
+        if (type === "TRANSFER_IN" || amount > 0) return "+";
         return "-";
       };
 
@@ -548,6 +599,8 @@ export function ActivityTable() {
     const iconBackgrounds = {
       [TransactionType.TRANSFER]:
         "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+      [TransactionType.TRANSFER_IN]:
+        "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
       [TransactionType.DEPOSIT]:
         "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
       [TransactionType.WITHDRAWAL]:
@@ -564,6 +617,7 @@ export function ActivityTable() {
 
     const transactionIcons = {
       [TransactionType.TRANSFER]: <ArrowRight className="h-3.5 w-3.5" />,
+      [TransactionType.TRANSFER_IN]: <ArrowLeft className="h-3.5 w-3.5" />,
       [TransactionType.DEPOSIT]: <ArrowDownToLine className="h-3.5 w-3.5" />,
       [TransactionType.WITHDRAWAL]: <ArrowUpFromLine className="h-3.5 w-3.5" />,
       [TransactionType.PAYMENT]: <Wallet className="h-3.5 w-3.5" />,
@@ -600,6 +654,40 @@ export function ActivityTable() {
                 To: <span className="font-medium">{transaction.recipient}</span>
               </span>
             ) : null}
+          </>
+        );
+        break;
+      case "TRANSFER_IN":
+        details = (
+          <>
+            {transaction.transferInDetails?.senderName ? (
+              <span>
+                From:{" "}
+                <span className="font-medium">
+                  {transaction.transferInDetails.senderName}
+                </span>
+                {transaction.transferInDetails.senderAccountNumber && (
+                  <span className="ml-1 text-[10px] text-muted-foreground">
+                    ({transaction.transferInDetails.senderAccountNumber})
+                  </span>
+                )}
+                {transaction.transferInDetails.senderBankName && (
+                  <span className="ml-1 text-[10px] text-muted-foreground">
+                    - {transaction.transferInDetails.senderBankName}
+                  </span>
+                )}
+              </span>
+            ) : null}
+            {transaction.transferInDetails?.referenceNumber && (
+              <span className="block text-[10px] text-muted-foreground">
+                Ref: {transaction.transferInDetails.referenceNumber}
+              </span>
+            )}
+            {transaction.transferInDetails?.description && (
+              <span className="block">
+                {transaction.transferInDetails.description}
+              </span>
+            )}
           </>
         );
         break;
@@ -685,6 +773,7 @@ export function ActivityTable() {
     }
 
     const isTransfer = transaction.type === "TRANSFER";
+    const isTransferIn = transaction.type === "TRANSFER_IN";
     const isIncoming = transaction.amount > 0;
     const formattedAmount = new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -740,22 +829,32 @@ export function ActivityTable() {
         </div>
         <div className="flex items-center justify-between pt-1.5">
           <div className="text-xs text-muted-foreground">
-            {new Date(transaction.date).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
+            {(() => {
+              const date = new Date(transaction.date);
+              if (isNaN(date.getTime())) {
+                return "Invalid Date";
+              }
+              return date.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              });
+            })()}
           </div>
           <div
             className={`text-sm font-medium ${
               isTransfer
                 ? "text-red-500"
-                : transaction.amount > 0
+                : isTransferIn || transaction.amount > 0
                 ? "text-green-500"
                 : "text-red-500"
             }`}
           >
-            {isTransfer ? "-" : transaction.amount > 0 ? "+" : "-"}
+            {isTransfer
+              ? "-"
+              : isTransferIn || transaction.amount > 0
+              ? "+"
+              : "-"}
             {formattedAmount}
           </div>
         </div>

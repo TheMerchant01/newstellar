@@ -70,6 +70,7 @@ enum TransactionType {
   CHEQUE_DEPOSIT = "CHEQUE_DEPOSIT",
   WITHDRAWAL = "WITHDRAWAL",
   TRANSFER = "TRANSFER",
+  TRANSFER_IN = "TRANSFER_IN",
   PAYMENT = "PAYMENT",
   LOAN_PAYMENT = "LOAN_PAYMENT",
 }
@@ -117,6 +118,15 @@ interface ITransferDetails {
   description?: string;
 }
 
+interface ITransferInDetails {
+  senderName: string;
+  senderAccountNumber: string;
+  senderBankName: string;
+  senderCountry: string;
+  referenceNumber: string;
+  description?: string;
+}
+
 // Update ITransaction to include these fields
 interface ITransaction {
   _id: string;
@@ -132,6 +142,7 @@ interface ITransaction {
   cryptoDetails?: ICryptoDetails;
   chequeDetails?: IChequeDetails;
   transferDetails?: ITransferDetails;
+  transferInDetails?: ITransferInDetails;
   recipient?: string;
   paymentMethod?: string;
   notes?: string;
@@ -169,6 +180,9 @@ function TransactionDetailsModal({
     [TransactionType.TRANSFER]: (
       <ArrowRight className="h-5 w-5 text-violet-500" />
     ),
+    [TransactionType.TRANSFER_IN]: (
+      <ArrowLeft className="h-5 w-5 text-green-500" />
+    ),
     [TransactionType.DEPOSIT]: (
       <ArrowDownToLine className="h-5 w-5 text-emerald-500" />
     ),
@@ -198,6 +212,8 @@ function TransactionDetailsModal({
       "bg-rose-500/10 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 border-rose-200",
     [TransactionType.TRANSFER]:
       "bg-violet-500/10 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400 border-violet-200",
+    [TransactionType.TRANSFER_IN]:
+      "bg-green-500/10 text-green-700 dark:bg-green-900/30 dark:text-green-400 border-green-200",
     [TransactionType.PAYMENT]:
       "bg-amber-500/10 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border-amber-200",
     [TransactionType.LOAN_PAYMENT]:
@@ -555,6 +571,65 @@ function TransactionDetailsModal({
                   </div>
                 </div>
               )}
+              {transaction.transferInDetails && (
+                <div className="pt-4 border-t">
+                  <h4 className="text-sm font-medium text-muted-foreground mb-1.5">
+                    Transfer In Details
+                  </h4>
+                  <div className="bg-zinc-50 dark:bg-zinc-900 p-3 rounded-lg border space-y-2">
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-medium text-muted-foreground">
+                        Sender Name:
+                      </p>
+                      <p className="text-base">
+                        {transaction.transferInDetails.senderName}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-medium text-muted-foreground">
+                        Sender Account:
+                      </p>
+                      <p className="text-base">
+                        {transaction.transferInDetails.senderAccountNumber}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-medium text-muted-foreground">
+                        Sender Bank:
+                      </p>
+                      <p className="text-base">
+                        {transaction.transferInDetails.senderBankName}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-medium text-muted-foreground">
+                        Sender Country:
+                      </p>
+                      <p className="text-base">
+                        {transaction.transferInDetails.senderCountry}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-medium text-muted-foreground">
+                        Reference Number:
+                      </p>
+                      <p className="text-base">
+                        {transaction.transferInDetails.referenceNumber}
+                      </p>
+                    </div>
+                    {transaction.transferInDetails.description && (
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm font-medium text-muted-foreground">
+                          Description:
+                        </p>
+                        <p className="text-base">
+                          {transaction.transferInDetails.description}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </ScrollArea>
           <div className="flex items-center justify-between p-4 border-t bg-zinc-50 dark:bg-zinc-900">
@@ -613,6 +688,7 @@ export function ActivityTable() {
           [TransactionType.CHEQUE_DEPOSIT]: "bg-teal-500/10",
           [TransactionType.WITHDRAWAL]: "bg-rose-500/10",
           [TransactionType.TRANSFER]: "bg-violet-500/10",
+          [TransactionType.TRANSFER_IN]: "bg-green-500/10",
           [TransactionType.PAYMENT]: "bg-amber-500/10",
           [TransactionType.LOAN_PAYMENT]: "bg-indigo-500/10",
         };
@@ -632,6 +708,9 @@ export function ActivityTable() {
           ),
           [TransactionType.TRANSFER]: (
             <ArrowRight className="h-4 w-4 text-violet-500" />
+          ),
+          [TransactionType.TRANSFER_IN]: (
+            <ArrowLeft className="h-4 w-4 text-green-500" />
           ),
           [TransactionType.PAYMENT]: (
             <Wallet className="h-4 w-4 text-amber-500" />
@@ -669,6 +748,40 @@ export function ActivityTable() {
                       </span>
                     </span>
                   )}
+              </>
+            );
+            break;
+          case TransactionType.TRANSFER_IN:
+            details = (
+              <>
+                {transaction.transferInDetails?.senderName && (
+                  <span>
+                    From:{" "}
+                    <span className="font-medium">
+                      {transaction.transferInDetails.senderName}
+                    </span>
+                    {transaction.transferInDetails.senderAccountNumber && (
+                      <span className="ml-1 text-[10px] text-muted-foreground">
+                        ({transaction.transferInDetails.senderAccountNumber})
+                      </span>
+                    )}
+                    {transaction.transferInDetails.senderBankName && (
+                      <span className="ml-1 text-[10px] text-muted-foreground">
+                        - {transaction.transferInDetails.senderBankName}
+                      </span>
+                    )}
+                  </span>
+                )}
+                {transaction.transferInDetails?.referenceNumber && (
+                  <span className="block text-[10px] text-muted-foreground">
+                    Ref: {transaction.transferInDetails.referenceNumber}
+                  </span>
+                )}
+                {transaction.transferInDetails?.description && (
+                  <span className="block">
+                    {transaction.transferInDetails.description}
+                  </span>
+                )}
               </>
             );
             break;
@@ -807,8 +920,17 @@ export function ActivityTable() {
       ),
       cell: ({ row }) => {
         const date = row.getValue("createdAt") as string;
+        const dateObj = new Date(date);
+
+        // Check if date is valid
+        if (isNaN(dateObj.getTime())) {
+          return (
+            <div className="text-sm text-muted-foreground">Invalid Date</div>
+          );
+        }
+
         // Format: Apr 27, 2024 · 2:15 PM
-        const formattedDate = new Date(date)
+        const formattedDate = dateObj
           .toLocaleString("en-US", {
             month: "short",
             day: "numeric",
@@ -839,6 +961,7 @@ export function ActivityTable() {
         const isDebit =
           transaction.type === TransactionType.TRANSFER ||
           transaction.type === TransactionType.WITHDRAWAL;
+        // TRANSFER_IN is always a credit (green/plus)
         const formatted = new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: transaction.currency.name.includes("USDT") ? "USD" : "USD",
