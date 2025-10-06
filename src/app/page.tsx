@@ -1,19 +1,19 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Star, ArrowRight, User } from "lucide-react"
-import Image from "next/image"
-import { IoFlash } from "react-icons/io5"
-import { BsFillShieldLockFill } from "react-icons/bs"
-import { FaMobile } from "react-icons/fa6"
-import { BiSolidBank, BiSolidCreditCardAlt } from "react-icons/bi"
-import { TbBriefcase2Filled } from "react-icons/tb"
-import SiteHeader from "@/components/site-header"
-import SiteFooter from "@/components/site-footer"
-import CTASection from "@/components/cta-section"
-import ScrollReveal from "@/components/scroll-reveal"
-import StaggeredReveal from "@/components/staggered-reveal"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle, Star, ArrowRight, User } from "lucide-react";
+import Image from "next/image";
+import { IoFlash } from "react-icons/io5";
+import { BsFillShieldLockFill } from "react-icons/bs";
+import { FaMobile } from "react-icons/fa6";
+import { BiSolidBank, BiSolidCreditCardAlt } from "react-icons/bi";
+import { TbBriefcase2Filled } from "react-icons/tb";
+import SiteHeader from "@/components/site-header";
+import SiteFooter from "@/components/site-footer";
+import CTASection from "@/components/cta-section";
+import ScrollReveal from "@/components/scroll-reveal";
+import StaggeredReveal from "@/components/staggered-reveal";
+import Link from "next/link";
 
 export default function BankingLandingPage() {
   return (
@@ -54,8 +54,9 @@ export default function BankingLandingPage() {
 
               <ScrollReveal direction="left" delay={600}>
                 <p className="mt-4 sm:mt-6 text-base sm:text-lg text-zinc-500 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                  Experience the future of banking with our award-winning platform. Manage your finances, transfer
-                  money, and invest with confidence.
+                  Experience the future of banking with our award-winning
+                  platform. Manage your finances, transfer money, and invest
+                  with confidence.
                 </p>
               </ScrollReveal>
 
@@ -97,7 +98,11 @@ export default function BankingLandingPage() {
               </StaggeredReveal>
             </div>
 
-            <ScrollReveal direction="right" delay={300} className="relative order-1 lg:order-2">
+            <ScrollReveal
+              direction="right"
+              delay={300}
+              className="relative order-1 lg:order-2"
+            >
               <div className="relative z-10 group">
                 <Image
                   src="/images/hero-cards.png"
@@ -123,20 +128,36 @@ export default function BankingLandingPage() {
               direction="up"
             >
               <div className="hover:scale-110 transition-transform duration-300">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">2M+</div>
-                <div className="text-gray-400 mt-1 sm:mt-2 text-xs sm:text-sm">Active Users</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+                  2M+
+                </div>
+                <div className="text-gray-400 mt-1 sm:mt-2 text-xs sm:text-sm">
+                  Active Users
+                </div>
               </div>
               <div className="hover:scale-110 transition-transform duration-300">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">$50B+</div>
-                <div className="text-gray-400 mt-1 sm:mt-2 text-xs sm:text-sm">Transactions</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+                  $50B+
+                </div>
+                <div className="text-gray-400 mt-1 sm:mt-2 text-xs sm:text-sm">
+                  Transactions
+                </div>
               </div>
               <div className="hover:scale-110 transition-transform duration-300">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">99.9%</div>
-                <div className="text-gray-400 mt-1 sm:mt-2 text-xs sm:text-sm">Uptime</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+                  99.9%
+                </div>
+                <div className="text-gray-400 mt-1 sm:mt-2 text-xs sm:text-sm">
+                  Uptime
+                </div>
               </div>
               <div className="hover:scale-110 transition-transform duration-300">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">4.9★</div>
-                <div className="text-gray-400 mt-1 sm:mt-2 text-xs sm:text-sm">App Rating</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+                  4.9★
+                </div>
+                <div className="text-gray-400 mt-1 sm:mt-2 text-xs sm:text-sm">
+                  App Rating
+                </div>
               </div>
             </StaggeredReveal>
           </div>
@@ -144,7 +165,10 @@ export default function BankingLandingPage() {
       </ScrollReveal>
 
       {/* Features Section */}
-      <section id="features" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-16 bg-gray-50">
+      <section
+        id="features"
+        className="py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-16 bg-gray-50"
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="up" delay={200}>
             <div className="mb-12 sm:mb-16 flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6">
@@ -152,7 +176,8 @@ export default function BankingLandingPage() {
                 Loans and Investment opportunities
               </h2>
               <p className="text-sm sm:text-base text-gray-600 max-w-lg leading-relaxed">
-                From everyday banking to investment management, we've got you covered with cutting-edge features.
+                From everyday banking to investment management, we've got you
+                covered with cutting-edge features.
               </p>
             </div>
           </ScrollReveal>
@@ -172,7 +197,8 @@ export default function BankingLandingPage() {
                     Access our full-suite banking services
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4 sm:mb-6">
-                    Bank on-the-go with our award-winning mobile app. Available for iOS and Android.
+                    Bank on-the-go with our award-winning mobile app. Available
+                    for iOS and Android.
                   </p>
                   <Button
                     size="lg"
@@ -195,7 +221,8 @@ export default function BankingLandingPage() {
                     We Handle your finances securely
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4 sm:mb-6">
-                    Bank-level security with 256-bit encryption and fraud monitoring to keep your money safe.
+                    Bank-level security with 256-bit encryption and fraud
+                    monitoring to keep your money safe.
                   </p>
                   <Button
                     size="lg"
@@ -218,7 +245,8 @@ export default function BankingLandingPage() {
                     Our Transfers are lightning Fast
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4 sm:mb-6">
-                    Instant transfers and real-time notifications keep you in control of your money.
+                    Instant transfers and real-time notifications keep you in
+                    control of your money.
                   </p>
                   <Button
                     size="lg"
@@ -234,8 +262,11 @@ export default function BankingLandingPage() {
         </div>
       </section>
 
-        {/* Loans Section */}
-        <section id="loans" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-16 bg-white">
+      {/* Loans Section */}
+      <section
+        id="loans"
+        className="py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-16 bg-white"
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="up" delay={200}>
             <div className="text-center mb-12 sm:mb-16">
@@ -243,8 +274,9 @@ export default function BankingLandingPage() {
                 Flexible Loan Solutions for Every Need
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-relaxed">
-                Whether you're buying a home, starting a business, or consolidating debt, we offer competitive rates and
-                personalized loan options to help you achieve your financial goals.
+                Whether you're buying a home, starting a business, or
+                consolidating debt, we offer competitive rates and personalized
+                loan options to help you achieve your financial goals.
               </p>
             </div>
           </ScrollReveal>
@@ -257,7 +289,12 @@ export default function BankingLandingPage() {
             <Card className="p-6 sm:p-8 border-zinc-100 hover:bg-gradient-to-br hover:from-white hover:to-green-50 rounded-xl sm:rounded-2xl duration-500 transition-all hover:scale-105 hover:shadow-xl group">
               <CardContent className="py-0">
                 <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-8 h-8 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -266,9 +303,12 @@ export default function BankingLandingPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-semibold mb-3 text-gray-900">Home Loans</h3>
+                <h3 className="text-xl sm:text-2xl font-semibold mb-3 text-gray-900">
+                  Home Loans
+                </h3>
                 <p className="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
-                  Competitive mortgage rates starting from 3.2% APR. First-time buyer programs available.
+                  Competitive mortgage rates starting from 3.2% APR. First-time
+                  buyer programs available.
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center text-sm text-gray-600">
@@ -290,7 +330,12 @@ export default function BankingLandingPage() {
             <Card className="p-6 sm:p-8 border-zinc-100 hover:bg-gradient-to-br hover:from-white hover:to-blue-50 rounded-xl sm:rounded-2xl duration-500 transition-all hover:scale-105 hover:shadow-xl group">
               <CardContent className="py-0">
                 <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-8 h-8 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -299,9 +344,12 @@ export default function BankingLandingPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-semibold mb-3 text-gray-900">Business Loans</h3>
+                <h3 className="text-xl sm:text-2xl font-semibold mb-3 text-gray-900">
+                  Business Loans
+                </h3>
                 <p className="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
-                  Fuel your business growth with flexible financing options from $10K to $5M.
+                  Fuel your business growth with flexible financing options from
+                  $10K to $5M.
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center text-sm text-gray-600">
@@ -323,7 +371,12 @@ export default function BankingLandingPage() {
             <Card className="p-6 sm:p-8 border-zinc-100 hover:bg-gradient-to-br hover:from-white hover:to-purple-50 rounded-xl sm:rounded-2xl duration-500 transition-all hover:scale-105 hover:shadow-xl group md:col-span-2 lg:col-span-1">
               <CardContent className="py-0">
                 <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                  <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-8 h-8 text-purple-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -332,9 +385,12 @@ export default function BankingLandingPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-semibold mb-3 text-gray-900">Personal Loans</h3>
+                <h3 className="text-xl sm:text-2xl font-semibold mb-3 text-gray-900">
+                  Personal Loans
+                </h3>
                 <p className="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
-                  Consolidate debt, fund major purchases, or cover unexpected expenses.
+                  Consolidate debt, fund major purchases, or cover unexpected
+                  expenses.
                 </p>
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center text-sm text-gray-600">
@@ -360,19 +416,24 @@ export default function BankingLandingPage() {
                 Ready to Apply for a Loan?
               </h3>
               <p className="text-zinc-300 mb-8 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-                Get pre-approved in minutes with our simple online application. No hidden fees, transparent terms, and
-                personalized rates based on your credit profile.
+                Get pre-approved in minutes with our simple online application.
+                No hidden fees, transparent terms, and personalized rates based
+                on your credit profile.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link href="/loan-application"> <Button
-                  size="lg"
-                  className="bg-white hover:bg-gray-100 text-zinc-900 rounded-2xl px-8 py-4 text-base font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl group w-full sm:w-auto"
+                <Link
+                  target=""
+                  href="https://creditchecker.stellarone-holdings.com"
                 >
-                  Apply for Loan
-                  <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-                </Button>
+                  {" "}
+                  <Button
+                    size="lg"
+                    className="bg-white hover:bg-gray-100 text-zinc-900 rounded-2xl px-8 py-4 text-base font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl group w-full sm:w-auto"
+                  >
+                    Apply for Loan
+                    <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Button>
                 </Link>
-               
               </div>
               <div className="mt-6 flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-xs sm:text-sm text-zinc-400">
                 <div className="flex items-center">
@@ -394,10 +455,17 @@ export default function BankingLandingPage() {
       </section>
 
       {/* Security Section */}
-      <section id="security" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-16 bg-white">
+      <section
+        id="security"
+        className="py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-16 bg-white"
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <ScrollReveal direction="left" delay={200} className="relative order-2 lg:order-1">
+            <ScrollReveal
+              direction="left"
+              delay={200}
+              className="relative order-2 lg:order-1"
+            >
               <div className="group">
                 <Image
                   src="/images/vault.png"
@@ -418,12 +486,17 @@ export default function BankingLandingPage() {
 
               <ScrollReveal direction="right" delay={400}>
                 <p className="text-gray-600 mb-6 sm:mb-8 max-w-lg text-sm sm:text-base leading-relaxed">
-                  We offer a variety of tools and resources to help you manage your finances more effectively and
-                  achieve your financial goals.
+                  We offer a variety of tools and resources to help you manage
+                  your finances more effectively and achieve your financial
+                  goals.
                 </p>
               </ScrollReveal>
 
-              <StaggeredReveal className="flex flex-col sm:flex-row gap-3 sm:gap-4" staggerDelay={200} direction="up">
+              <StaggeredReveal
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+                staggerDelay={200}
+                direction="up"
+              >
                 <div className="flex flex-col items-center border rounded-xl py-4 px-3 sm:px-4 bg-zinc-900 flex-1 transition-all duration-300 hover:scale-105 hover:bg-zinc-800 group">
                   <BiSolidBank className="w-7 h-7 sm:w-9 sm:h-9 text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" />
                   <div className="mx-auto mt-3">
@@ -442,7 +515,9 @@ export default function BankingLandingPage() {
                     <h3 className="font-semibold text-sm sm:text-lg text-center text-zinc-100 leading-tight">
                       Credit/Debit Cards
                     </h3>
-                    <p className="text-xs sm:text-sm leading-4 mt-2 text-zinc-400 text-center">Contactless payments</p>
+                    <p className="text-xs sm:text-sm leading-4 mt-2 text-zinc-400 text-center">
+                      Contactless payments
+                    </p>
                   </div>
                 </div>
 
@@ -452,7 +527,9 @@ export default function BankingLandingPage() {
                     <h3 className="font-semibold text-white text-sm sm:text-lg text-center leading-tight">
                       Loans and Credit
                     </h3>
-                    <p className="text-zinc-400 text-xs sm:text-sm leading-4 mt-2 text-center">Competitive rates</p>
+                    <p className="text-zinc-400 text-xs sm:text-sm leading-4 mt-2 text-center">
+                      Competitive rates
+                    </p>
                   </div>
                 </div>
               </StaggeredReveal>
@@ -460,8 +537,6 @@ export default function BankingLandingPage() {
           </div>
         </div>
       </section>
-
-    
 
       {/* Testimonials */}
       <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-16 bg-gray-50">
@@ -472,8 +547,9 @@ export default function BankingLandingPage() {
                 Trusted by over Two Million Users
               </h2>
               <p className="max-w-lg text-gray-600 text-sm sm:text-base leading-relaxed">
-                See what our customers have to say about their banking experience and how we've helped them achieve
-                their financial goals.
+                See what our customers have to say about their banking
+                experience and how we've helped them achieve their financial
+                goals.
               </p>
             </div>
           </ScrollReveal>
@@ -521,7 +597,9 @@ export default function BankingLandingPage() {
                           <Star
                             key={i}
                             className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 hover:scale-125 ${
-                              i < testimonial.rating ? "text-yellow-400 fill-current" : "text-gray-200"
+                              i < testimonial.rating
+                                ? "text-yellow-400 fill-current"
+                                : "text-gray-200"
                             }`}
                           />
                         ))}
@@ -538,8 +616,12 @@ export default function BankingLandingPage() {
                             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                           </div>
                           <div>
-                            <div className="font-semibold text-sm sm:text-base">{testimonial.name}</div>
-                            <div className="text-xs sm:text-sm text-gray-500">{testimonial.role}</div>
+                            <div className="font-semibold text-sm sm:text-base">
+                              {testimonial.name}
+                            </div>
+                            <div className="text-xs sm:text-sm text-gray-500">
+                              {testimonial.role}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -583,7 +665,9 @@ export default function BankingLandingPage() {
                           <Star
                             key={i}
                             className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 hover:scale-125 ${
-                              i < testimonial.rating ? "text-yellow-400 fill-current" : "text-gray-200"
+                              i < testimonial.rating
+                                ? "text-yellow-400 fill-current"
+                                : "text-gray-200"
                             }`}
                           />
                         ))}
@@ -600,8 +684,12 @@ export default function BankingLandingPage() {
                             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                           </div>
                           <div>
-                            <div className="font-semibold text-sm sm:text-base">{testimonial.name}</div>
-                            <div className="text-xs sm:text-sm text-gray-500">{testimonial.role}</div>
+                            <div className="font-semibold text-sm sm:text-base">
+                              {testimonial.name}
+                            </div>
+                            <div className="text-xs sm:text-sm text-gray-500">
+                              {testimonial.role}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -645,7 +733,9 @@ export default function BankingLandingPage() {
                           <Star
                             key={i}
                             className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 hover:scale-125 ${
-                              i < testimonial.rating ? "text-yellow-400 fill-current" : "text-gray-200"
+                              i < testimonial.rating
+                                ? "text-yellow-400 fill-current"
+                                : "text-gray-200"
                             }`}
                           />
                         ))}
@@ -662,8 +752,12 @@ export default function BankingLandingPage() {
                             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                           </div>
                           <div>
-                            <div className="font-semibold text-sm sm:text-base">{testimonial.name}</div>
-                            <div className="text-xs sm:text-sm text-gray-500">{testimonial.role}</div>
+                            <div className="font-semibold text-sm sm:text-base">
+                              {testimonial.name}
+                            </div>
+                            <div className="text-xs sm:text-sm text-gray-500">
+                              {testimonial.role}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -687,5 +781,5 @@ export default function BankingLandingPage() {
       {/* Footer */}
       <SiteFooter />
     </div>
-  )
+  );
 }
