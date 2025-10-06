@@ -1175,6 +1175,7 @@ export function ActivityTable() {
       [TransactionType.CHEQUE_DEPOSIT]: "bg-teal-500/10",
       [TransactionType.WITHDRAWAL]: "bg-rose-500/10",
       [TransactionType.TRANSFER]: "bg-violet-500/10",
+      [TransactionType.TRANSFER_IN]: "bg-green-500/10",
       [TransactionType.PAYMENT]: "bg-amber-500/10",
       [TransactionType.LOAN_PAYMENT]: "bg-indigo-500/10",
     };
@@ -1194,6 +1195,9 @@ export function ActivityTable() {
       ),
       [TransactionType.TRANSFER]: (
         <ArrowRight className="h-3.5 w-3.5 text-violet-500" />
+      ),
+      [TransactionType.TRANSFER_IN]: (
+        <ArrowLeft className="h-3.5 w-3.5 text-green-500" />
       ),
       [TransactionType.PAYMENT]: (
         <Wallet className="h-3.5 w-3.5 text-amber-500" />
