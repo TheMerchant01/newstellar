@@ -361,7 +361,7 @@ const columns: ColumnDef<Transaction>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const dateValue = row.getValue("date");
+      const dateValue = row.getValue("date") as string;
       const date = new Date(dateValue);
 
       // Check if date is valid
@@ -398,7 +398,7 @@ const columns: ColumnDef<Transaction>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
+      const amount = parseFloat(row.getValue("amount") as string);
       const type = row.original.type;
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",

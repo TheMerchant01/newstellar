@@ -201,7 +201,7 @@ export const columns: ColumnDef<Transaction>[] = [
       );
     },
     cell: ({ row }) => {
-      const date = new Date(row.getValue("date"));
+      const date = new Date(row.getValue("date") as string);
       return (
         <div>
           {date
@@ -233,7 +233,7 @@ export const columns: ColumnDef<Transaction>[] = [
       );
     },
     cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue("amount"));
+      const amount = Number.parseFloat(row.getValue("amount") as string);
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
@@ -609,7 +609,6 @@ export function ActivityTable() {
           </div>
 
           <Button
-            
             size="sm"
             onClick={() => {
               setFilterType("all");

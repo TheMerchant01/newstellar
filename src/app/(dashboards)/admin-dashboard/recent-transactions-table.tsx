@@ -435,7 +435,7 @@ export function RecentTransactionsTable() {
         </Button>
       ),
       cell: ({ row }) => {
-        const amount = Number.parseFloat(row.getValue("amount"));
+        const amount = Number.parseFloat(row.getValue("amount") as string);
         const formatted = new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
@@ -501,7 +501,7 @@ export function RecentTransactionsTable() {
         </Button>
       ),
       cell: ({ row }) => {
-        const date = new Date(row.getValue("createdAt"));
+        const date = new Date(row.getValue("createdAt") as string);
         return (
           <div>
             {date
