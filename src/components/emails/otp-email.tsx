@@ -56,7 +56,7 @@ export function OTPEmail({ otpCode }: OTPEmailProps) {
             fontWeight: "600",
           }}
         >
-          SecureBank
+          Stellarone Holdings
         </h1>
       </div>
 
@@ -124,8 +124,8 @@ export function OTPEmail({ otpCode }: OTPEmailProps) {
         >
           <p style={{ color: "#64748b", fontSize: "14px", margin: "0" }}>
             <strong className="text-red-700">Security Tip:</strong> Never share
-            this code with anyone, including SecureBank staff. We will never ask
-            for your OTP via phone or email.
+            this code with anyone, including Stellarone Holdings staff. We will
+            never ask for your OTP via phone or email.
           </p>
         </div>
 

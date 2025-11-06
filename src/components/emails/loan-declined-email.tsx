@@ -60,7 +60,7 @@ export function LoanDeclinedEmail({
             fontWeight: "600",
           }}
         >
-          SecureBank
+          Stellarone Holdings
         </h1>
       </div>
 
@@ -106,9 +106,9 @@ export function LoanDeclinedEmail({
             marginBottom: "24px",
           }}
         >
-          Thank you for your interest in SecureBank's loan services. After
-          careful review of your application, we are unable to approve your loan
-          request at this time.
+          Thank you for your interest in Stellarone Holdings's loan services.
+          After careful review of your application, we are unable to approve
+          your loan request at this time.
         </p>
 
         <div
@@ -368,9 +368,9 @@ export function LoanDeclinedEmail({
         </div>
 
         <p style={{ color: "#71717a", fontSize: "14px", lineHeight: "1.5" }}>
-          Thank you for considering SecureBank for your financing needs. We're
-          here to help you achieve your financial goals and look forward to
-          serving you in the future.
+          Thank you for considering Stellarone Holdings for your financing
+          needs. We're here to help you achieve your financial goals and look
+          forward to serving you in the future.
         </p>
 
         <div

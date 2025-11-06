@@ -1,14 +1,33 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { User, Mail, Lock, Plus, Trash2 } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react";
+import { User, Mail, Lock, Plus, Trash2 } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -17,15 +36,15 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "@/components/ui/dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface Admin {
   id: number;
   name: string;
   email: string;
   role: string;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
   lastLogin: string | null;
   avatar: string;
 }
@@ -58,19 +77,21 @@ interface AdminManagementTabProps {
 type CurrentAdminField = keyof CurrentAdmin;
 type PasswordChangeField = keyof PasswordChange;
 
-export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps) {
+export function AdminManagementTab({
+  onSettingsChange,
+}: AdminManagementTabProps) {
   const [currentAdmin, setCurrentAdmin] = useState<CurrentAdmin>({
     name: "John Administrator",
-    email: "admin@securebank.com",
+    email: "admin@stellarone-holdings.com",
     role: "Super Admin",
     lastLogin: "2023-06-01T10:30:00Z",
-  })
+  });
 
   const [admins, setAdmins] = useState<Admin[]>([
     {
       id: 1,
       name: "John Administrator",
-      email: "admin@securebank.com",
+      email: "admin@stellarone-holdings.com",
       role: "Super Admin",
       status: "active",
       lastLogin: "2023-06-01T10:30:00Z",
@@ -79,7 +100,7 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
     {
       id: 2,
       name: "Sarah Manager",
-      email: "sarah@securebank.com",
+      email: "sarah@stellarone-holdings.com",
       role: "Manager",
       status: "active",
       lastLogin: "2023-05-31T16:45:00Z",
@@ -88,13 +109,13 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
     {
       id: 3,
       name: "Mike Supervisor",
-      email: "mike@securebank.com",
+      email: "mike@stellarone-holdings.com",
       role: "Supervisor",
       status: "inactive",
       lastLogin: "2023-05-28T09:15:00Z",
       avatar: "/placeholder.svg?height=40&width=40",
     },
-  ])
+  ]);
 
   const [newAdmin, setNewAdmin] = useState<NewAdmin>({
     name: "",
@@ -102,28 +123,31 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
     role: "Supervisor",
     password: "",
     confirmPassword: "",
-  })
+  });
 
-  const [isAddAdminOpen, setIsAddAdminOpen] = useState(false)
+  const [isAddAdminOpen, setIsAddAdminOpen] = useState(false);
   const [passwordChange, setPasswordChange] = useState<PasswordChange>({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
-  })
+  });
 
-  const handleCurrentAdminChange = (field: CurrentAdminField, value: string) => {
-    setCurrentAdmin((prev) => ({ ...prev, [field]: value }))
-    onSettingsChange()
-  }
+  const handleCurrentAdminChange = (
+    field: CurrentAdminField,
+    value: string
+  ) => {
+    setCurrentAdmin((prev) => ({ ...prev, [field]: value }));
+    onSettingsChange();
+  };
 
   const handlePasswordChange = (field: PasswordChangeField, value: string) => {
-    setPasswordChange((prev) => ({ ...prev, [field]: value }))
-  }
+    setPasswordChange((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleAddAdmin = () => {
     if (newAdmin.password !== newAdmin.confirmPassword) {
-      alert("Passwords don't match!")
-      return
+      alert("Passwords don't match!");
+      return;
     }
 
     const admin: Admin = {
@@ -134,34 +158,45 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
       status: "active",
       lastLogin: null,
       avatar: "/placeholder.svg?height=40&width=40",
-    }
+    };
 
-    setAdmins((prev) => [...prev, admin])
-    setNewAdmin({ name: "", email: "", role: "Supervisor", password: "", confirmPassword: "" })
-    setIsAddAdminOpen(false)
-    onSettingsChange()
-  }
+    setAdmins((prev) => [...prev, admin]);
+    setNewAdmin({
+      name: "",
+      email: "",
+      role: "Supervisor",
+      password: "",
+      confirmPassword: "",
+    });
+    setIsAddAdminOpen(false);
+    onSettingsChange();
+  };
 
   const handleDeleteAdmin = (id: number) => {
-    setAdmins((prev) => prev.filter((admin) => admin.id !== id))
-    onSettingsChange()
-  }
+    setAdmins((prev) => prev.filter((admin) => admin.id !== id));
+    onSettingsChange();
+  };
 
   const toggleAdminStatus = (id: number) => {
     setAdmins((prev) =>
       prev.map((admin) =>
-        admin.id === id ? { ...admin, status: admin.status === "active" ? "inactive" : "active" } : admin,
-      ),
-    )
-    onSettingsChange()
-  }
+        admin.id === id
+          ? {
+              ...admin,
+              status: admin.status === "active" ? "inactive" : "active",
+            }
+          : admin
+      )
+    );
+    onSettingsChange();
+  };
 
   const roles = [
     { value: "Super Admin", label: "Super Admin" },
     { value: "Manager", label: "Manager" },
     { value: "Supervisor", label: "Supervisor" },
     { value: "Operator", label: "Operator" },
-  ]
+  ];
 
   return (
     <div className="space-y-6">
@@ -171,7 +206,9 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
             <User className="h-5 w-5" />
             Current Admin Profile
           </CardTitle>
-          <CardDescription>Update your personal information and login credentials</CardDescription>
+          <CardDescription>
+            Update your personal information and login credentials
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -180,7 +217,9 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
               <Input
                 id="admin-name"
                 value={currentAdmin.name}
-                onChange={(e) => handleCurrentAdminChange("name", e.target.value)}
+                onChange={(e) =>
+                  handleCurrentAdminChange("name", e.target.value)
+                }
                 placeholder="Enter your full name"
               />
             </div>
@@ -193,7 +232,9 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
                   type="email"
                   className="pl-8"
                   value={currentAdmin.email}
-                  onChange={(e) => handleCurrentAdminChange("email", e.target.value)}
+                  onChange={(e) =>
+                    handleCurrentAdminChange("email", e.target.value)
+                  }
                   placeholder="admin@yourbank.com"
                 />
               </div>
@@ -203,7 +244,12 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="admin-role">Role</Label>
-              <Select value={currentAdmin.role} onValueChange={(value) => handleCurrentAdminChange("role", value)}>
+              <Select
+                value={currentAdmin.role}
+                onValueChange={(value) =>
+                  handleCurrentAdminChange("role", value)
+                }
+              >
                 <SelectTrigger id="admin-role">
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>
@@ -232,7 +278,9 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
             <Lock className="h-5 w-5" />
             Change Password
           </CardTitle>
-          <CardDescription>Update your login password for enhanced security</CardDescription>
+          <CardDescription>
+            Update your login password for enhanced security
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -242,7 +290,9 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
                 id="current-password"
                 type="password"
                 value={passwordChange.currentPassword}
-                onChange={(e) => handlePasswordChange("currentPassword", e.target.value)}
+                onChange={(e) =>
+                  handlePasswordChange("currentPassword", e.target.value)
+                }
                 placeholder="Enter current password"
               />
             </div>
@@ -252,7 +302,9 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
                 id="new-password"
                 type="password"
                 value={passwordChange.newPassword}
-                onChange={(e) => handlePasswordChange("newPassword", e.target.value)}
+                onChange={(e) =>
+                  handlePasswordChange("newPassword", e.target.value)
+                }
                 placeholder="Enter new password"
               />
             </div>
@@ -262,21 +314,33 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
                 id="confirm-password"
                 type="password"
                 value={passwordChange.confirmPassword}
-                onChange={(e) => handlePasswordChange("confirmPassword", e.target.value)}
+                onChange={(e) =>
+                  handlePasswordChange("confirmPassword", e.target.value)
+                }
                 placeholder="Confirm new password"
               />
             </div>
           </div>
           <Button
             onClick={() => {
-              if (passwordChange.newPassword !== passwordChange.confirmPassword) {
-                alert("Passwords don't match!")
-                return
+              if (
+                passwordChange.newPassword !== passwordChange.confirmPassword
+              ) {
+                alert("Passwords don't match!");
+                return;
               }
-              setPasswordChange({ currentPassword: "", newPassword: "", confirmPassword: "" })
-              onSettingsChange()
+              setPasswordChange({
+                currentPassword: "",
+                newPassword: "",
+                confirmPassword: "",
+              });
+              onSettingsChange();
             }}
-            disabled={!passwordChange.currentPassword || !passwordChange.newPassword || !passwordChange.confirmPassword}
+            disabled={
+              !passwordChange.currentPassword ||
+              !passwordChange.newPassword ||
+              !passwordChange.confirmPassword
+            }
           >
             Update Password
           </Button>
@@ -428,12 +492,9 @@ export function AdminManagementTab({ onSettingsChange }: AdminManagementTabProps
           </Table>
         </CardContent>
       </Card> */}
-      <Button
-        variant="default"
-        className="bg-green-600 hover:bg-green-700"
-      >
+      <Button variant="default" className="bg-green-600 hover:bg-green-700">
         Save Changes
       </Button>
     </div>
-  )
+  );
 }

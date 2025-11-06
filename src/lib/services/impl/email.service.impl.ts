@@ -68,7 +68,7 @@ export class EmailServiceImpl implements EmailService {
           </div>
           <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 9px; padding: 16px; margin-bottom: 24px;">
             <p style="color: #64748b; font-size: 14px; margin: 0;">
-              <strong style="color: #b91c1c;">Security Tip:</strong> Never share this code with anyone, including SecureBank staff. We will never ask for your OTP via phone or email.
+              <strong style="color: #b91c1c;">Security Tip:</strong> Never share this code with anyone, including Stellarone Holdings staff. We will never ask for your OTP via phone or email.
             </p>
           </div>
           <p style="color: #71717a; font-size: 14px; line-height: 1.5;">
@@ -76,7 +76,7 @@ export class EmailServiceImpl implements EmailService {
           </p>
           <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
             <p style="color: #a1a1aa; font-size: 12px; text-align: center;">
-              Stellar One Holdings | 123 Banking Street, Finance City, FC 12345
+              Stellar One Holdings 
               <br />
               This is an automated message, please do not reply.
             </p>
@@ -149,7 +149,7 @@ export class EmailServiceImpl implements EmailService {
           </p>
           <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
             <p style="color: #a1a1aa; font-size: 12px; text-align: center;">
-              Stellar One Holdings | 123 Banking Street, Finance City, FC 12345
+              Stellar One Holdings 
               <br />
               This is an automated message, please do not reply.
             </p>

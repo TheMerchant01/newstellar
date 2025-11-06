@@ -62,7 +62,7 @@ export function TransferSuccessEmail({
             fontWeight: "600",
           }}
         >
-          SecureBank
+          Stellarone Holdings
         </h1>
       </div>
 
@@ -260,7 +260,7 @@ export function TransferSuccessEmail({
         </p>
 
         <p style={{ color: "#71717a", fontSize: "14px", lineHeight: "1.5" }}>
-          Thank you for using SecureBank's transfer services.
+          Thank you for using Stellarone Holdings's transfer services.
         </p>
 
         <div

@@ -1,13 +1,26 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Building, Plus, Trash2, Copy, Pencil } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useState, useEffect } from "react";
+import { Building, Plus, Trash2, Copy, Pencil } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
   Dialog,
   DialogContent,
@@ -16,56 +29,60 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { toast } from "@/components/ui/use-toast"
-import { useRouter } from "next/navigation"
-import { ICurrencyWithId } from "@/lib/models/currency.model"
-import { CreateCurrencyDto, UpdateCurrencyDto } from "@/lib/dto/currency.dto"
-import { api } from "@/api/axios"
+} from "@/components/ui/dialog";
+import { toast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import { ICurrencyWithId } from "@/lib/models/currency.model";
+import { CreateCurrencyDto, UpdateCurrencyDto } from "@/lib/dto/currency.dto";
+import { api } from "@/api/axios";
 
 // Define a clean type for state management to avoid Mongoose-specific properties
 interface CurrencyFormData {
-  _id?: string
-  name: string
-  walletAddress: string
-  active: boolean
-  createdAt?: Date
-  updatedAt?: Date
+  _id?: string;
+  name: string;
+  walletAddress: string;
+  active: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 interface BankAccount {
-  id: number
-  bankName: string
-  accountName: string
-  accountNumber: string
-  routingNumber: string
-  accountType: string
-  status: 'active' | 'inactive'
-  currency: string
+  id: number;
+  bankName: string;
+  accountName: string;
+  accountNumber: string;
+  routingNumber: string;
+  accountType: string;
+  status: "active" | "inactive";
+  currency: string;
 }
 
 interface PaymentMethodsTabProps {
-  onSettingsChange: () => void
+  onSettingsChange: () => void;
 }
 
-export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) {
-  const [isLoading, setIsLoading] = useState(true)
-  const [currencies, setCurrencies] = useState<ICurrencyWithId[]>([])
+export function PaymentMethodsTab({
+  onSettingsChange,
+}: PaymentMethodsTabProps) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [currencies, setCurrencies] = useState<ICurrencyWithId[]>([]);
   const [newCurrency, setNewCurrency] = useState<CreateCurrencyDto>({
     name: "",
     walletAddress: "",
     active: true,
-  })
-  const [editCurrency, setEditCurrency] = useState<CurrencyFormData | null>(null)
-  const [isAddCurrencyOpen, setIsAddCurrencyOpen] = useState(false)
-  const [isEditCurrencyOpen, setIsEditCurrencyOpen] = useState(false)
-  const router = useRouter()
+  });
+  const [editCurrency, setEditCurrency] = useState<CurrencyFormData | null>(
+    null
+  );
+  const [isAddCurrencyOpen, setIsAddCurrencyOpen] = useState(false);
+  const [isEditCurrencyOpen, setIsEditCurrencyOpen] = useState(false);
+  const router = useRouter();
 
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([
     {
       id: 1,
       bankName: "JPMorgan Chase",
-      accountName: "SecureBank Operating Account",
+      accountName: "Stellarone Holdings Operating Account",
       accountNumber: "****1234",
       routingNumber: "021000021",
       accountType: "checking",
@@ -75,7 +92,7 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
     {
       id: 2,
       bankName: "Bank of America",
-      accountName: "SecureBank Reserve Account",
+      accountName: "Stellarone Holdings Reserve Account",
       accountNumber: "****5678",
       routingNumber: "026009593",
       accountType: "savings",
@@ -85,14 +102,14 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
     {
       id: 3,
       bankName: "Wells Fargo",
-      accountName: "SecureBank International",
+      accountName: "Stellarone Holdings International",
       accountNumber: "****9012",
       routingNumber: "121000248",
       accountType: "checking",
       status: "inactive",
       currency: "USD",
     },
-  ])
+  ]);
 
   const [newBankAccount, setNewBankAccount] = useState<BankAccount>({
     id: 0,
@@ -103,157 +120,176 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
     accountType: "",
     status: "active",
     currency: "USD",
-  })
+  });
 
-  const [isAddBankOpen, setIsAddBankOpen] = useState(false)
+  const [isAddBankOpen, setIsAddBankOpen] = useState(false);
 
   const accountTypes = [
     { value: "checking", label: "Checking" },
     { value: "savings", label: "Savings" },
     { value: "business", label: "Business" },
     { value: "money_market", label: "Money Market" },
-  ]
+  ];
 
   // Validate DTO before submission
-  const validateCurrency = (data: CreateCurrencyDto | UpdateCurrencyDto, isUpdate: boolean = false) => {
-    const schema = isUpdate ? UpdateCurrencyDto.validationSchema : CreateCurrencyDto.validationSchema
-    const { error } = schema.validate(data, { abortEarly: false })
+  const validateCurrency = (
+    data: CreateCurrencyDto | UpdateCurrencyDto,
+    isUpdate: boolean = false
+  ) => {
+    const schema = isUpdate
+      ? UpdateCurrencyDto.validationSchema
+      : CreateCurrencyDto.validationSchema;
+    const { error } = schema.validate(data, { abortEarly: false });
     if (error) {
       toast({
         title: "Validation Error",
-        description: error.details.map(d => d.message).join(", "),
-        variant: "destructive"
-      })
-      return false
+        description: error.details.map((d) => d.message).join(", "),
+        variant: "destructive",
+      });
+      return false;
     }
-    return true
-  }
+    return true;
+  };
 
   // Fetch currencies on component mount
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
-        setIsLoading(true)
-        const response = await api.get('/currencies')
-        setCurrencies(response.data.currencies || [])
+        setIsLoading(true);
+        const response = await api.get("/currencies");
+        setCurrencies(response.data.currencies || []);
       } catch (error) {
         toast({
           title: "Error",
           description: "Failed to fetch currencies",
-          variant: "destructive"
-        })
+          variant: "destructive",
+        });
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
+    };
 
-    fetchCurrencies()
-  }, [])
+    fetchCurrencies();
+  }, []);
 
   const handleAddCurrency = async () => {
-    if (!validateCurrency(newCurrency)) return
+    if (!validateCurrency(newCurrency)) return;
 
     try {
-      const response = await api.post('/currencies', new CreateCurrencyDto(newCurrency))
-      setCurrencies(prev => [...prev, response.data.currency])
+      const response = await api.post(
+        "/currencies",
+        new CreateCurrencyDto(newCurrency)
+      );
+      setCurrencies((prev) => [...prev, response.data.currency]);
       setNewCurrency({
         name: "",
         walletAddress: "",
         active: true,
-      })
-      setIsAddCurrencyOpen(false)
-      onSettingsChange()
+      });
+      setIsAddCurrencyOpen(false);
+      onSettingsChange();
       toast({
         title: "Currency added successfully",
         description: `${newCurrency.name} has been added to your payment methods.`,
-      })
+      });
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to add currency",
-        variant: "destructive"
-      })
+        variant: "destructive",
+      });
     }
-  }
+  };
 
   const handleEditCurrency = async () => {
-    if (!editCurrency || !validateCurrency({
-      name: editCurrency.name,
-      walletAddress: editCurrency.walletAddress,
-      active: editCurrency.active
-    }, true)) return
+    if (
+      !editCurrency ||
+      !validateCurrency(
+        {
+          name: editCurrency.name,
+          walletAddress: editCurrency.walletAddress,
+          active: editCurrency.active,
+        },
+        true
+      )
+    )
+      return;
 
     try {
-      const response = await api.put(`/currencies/${editCurrency._id}`,
+      const response = await api.put(
+        `/currencies/${editCurrency._id}`,
         new UpdateCurrencyDto({
           name: editCurrency.name,
           walletAddress: editCurrency.walletAddress,
-          active: editCurrency.active
+          active: editCurrency.active,
         })
-      )
-      setCurrencies(prev =>
-        prev.map(currency =>
+      );
+      setCurrencies((prev) =>
+        prev.map((currency) =>
           currency._id === editCurrency._id ? response.data.currency : currency
         )
-      )
-      setIsEditCurrencyOpen(false)
-      setEditCurrency(null)
-      onSettingsChange()
+      );
+      setIsEditCurrencyOpen(false);
+      setEditCurrency(null);
+      onSettingsChange();
       toast({
         title: "Currency updated successfully",
         description: `${editCurrency.name} has been updated.`,
-      })
+      });
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to update currency",
-        variant: "destructive"
-      })
+        variant: "destructive",
+      });
     }
-  }
+  };
 
   const handleDeleteCurrency = async (id: string) => {
     try {
-      await api.delete(`/currencies/${id}`)
-      setCurrencies(prev => prev.filter(currency => currency._id !== id))
-      onSettingsChange()
+      await api.delete(`/currencies/${id}`);
+      setCurrencies((prev) => prev.filter((currency) => currency._id !== id));
+      onSettingsChange();
       toast({
         title: "Currency deleted successfully",
         description: "The currency has been removed from your payment methods.",
-      })
+      });
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to delete currency",
-        variant: "destructive"
-      })
+        variant: "destructive",
+      });
     }
-  }
+  };
 
   const handleToggleCurrencyStatus = async (id: string) => {
-    const currency = currencies.find(c => c._id === id)
-    if (!currency) return
+    const currency = currencies.find((c) => c._id === id);
+    if (!currency) return;
 
     try {
-      const response = await api.put(`/currencies/${id}`,
+      const response = await api.put(
+        `/currencies/${id}`,
         new UpdateCurrencyDto({ active: !currency.active })
-      )
-      setCurrencies(prev =>
-        prev.map(c => c._id === id ? response.data.currency : c)
-      )
-      onSettingsChange()
+      );
+      setCurrencies((prev) =>
+        prev.map((c) => (c._id === id ? response.data.currency : c))
+      );
+      onSettingsChange();
       toast({
         title: "Status updated",
-        description: `Currency status changed to ${!currency.active ? 'active' : 'inactive'}.`,
-      })
+        description: `Currency status changed to ${
+          !currency.active ? "active" : "inactive"
+        }.`,
+      });
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to update currency status",
-        variant: "destructive"
-      })
+        variant: "destructive",
+      });
     }
-  }
+  };
 
   const handleAddBankAccount = () => {
     // const account: BankAccount = {
@@ -270,50 +306,58 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
       accountType: "",
       status: "active",
       currency: "USD",
-    })
-    setIsAddBankOpen(false)
-    onSettingsChange()
+    });
+    setIsAddBankOpen(false);
+    onSettingsChange();
     toast({
       title: "Bank account added successfully",
       description: `${newBankAccount.bankName} account has been added to your payment methods.`,
-    })
-  }
+    });
+  };
 
   const handleDeleteBankAccount = (id: number) => {
-    setBankAccounts(prev => prev.filter(account => account.id !== id))
-    onSettingsChange()
+    setBankAccounts((prev) => prev.filter((account) => account.id !== id));
+    onSettingsChange();
     toast({
       title: "Bank account deleted successfully",
-      description: "The bank account has been removed from your payment methods.",
-    })
-  }
+      description:
+        "The bank account has been removed from your payment methods.",
+    });
+  };
 
   const handleToggleBankStatus = (id: number) => {
-    setBankAccounts(prev =>
-      prev.map(account =>
+    setBankAccounts((prev) =>
+      prev.map((account) =>
         account.id === id
-          ? { ...account, status: account.status === "active" ? "inactive" : "active" }
+          ? {
+              ...account,
+              status: account.status === "active" ? "inactive" : "active",
+            }
           : account
       )
-    )
-    onSettingsChange()
+    );
+    onSettingsChange();
     toast({
       title: "Status updated",
-      description: `Bank account status changed to ${bankAccounts.find(a => a.id === id)?.status === "active" ? "inactive" : "active"}.`,
-    })
-  }
+      description: `Bank account status changed to ${
+        bankAccounts.find((a) => a.id === id)?.status === "active"
+          ? "inactive"
+          : "active"
+      }.`,
+    });
+  };
 
-  const getStatusBadgeVariant = (status: boolean | 'active' | 'inactive') => {
-    return status === true || status === "active" ? "secondary" : "destructive"
-  }
+  const getStatusBadgeVariant = (status: boolean | "active" | "inactive") => {
+    return status === true || status === "active" ? "secondary" : "destructive";
+  };
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
+    navigator.clipboard.writeText(text);
     toast({
       title: "Copied to clipboard",
       description: "The wallet address has been copied to your clipboard.",
-    })
-  }
+    });
+  };
 
   return (
     <div className="space-y-6">
@@ -324,7 +368,10 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
               <Building className="h-5 w-5" />
               Cryptocurrency Management
             </span>
-            <Dialog open={isAddCurrencyOpen} onOpenChange={setIsAddCurrencyOpen}>
+            <Dialog
+              open={isAddCurrencyOpen}
+              onOpenChange={setIsAddCurrencyOpen}
+            >
               <DialogTrigger asChild>
                 <Button size="sm">
                   <Plus className="h-4 w-4 mr-2" />
@@ -334,7 +381,9 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                   <DialogTitle>Add Cryptocurrency</DialogTitle>
-                  <DialogDescription>Add a new cryptocurrency configuration.</DialogDescription>
+                  <DialogDescription>
+                    Add a new cryptocurrency configuration.
+                  </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                   <div className="space-y-2">
@@ -342,7 +391,12 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
                     <Input
                       id="currency-name"
                       value={newCurrency.name}
-                      onChange={(e) => setNewCurrency(prev => ({ ...prev, name: e.target.value }))}
+                      onChange={(e) =>
+                        setNewCurrency((prev) => ({
+                          ...prev,
+                          name: e.target.value,
+                        }))
+                      }
                       placeholder="e.g., Bitcoin"
                     />
                   </div>
@@ -351,13 +405,21 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
                     <Input
                       id="wallet-address"
                       value={newCurrency.walletAddress}
-                      onChange={(e) => setNewCurrency(prev => ({ ...prev, walletAddress: e.target.value }))}
+                      onChange={(e) =>
+                        setNewCurrency((prev) => ({
+                          ...prev,
+                          walletAddress: e.target.value,
+                        }))
+                      }
                       placeholder="Enter wallet address"
                     />
                   </div>
                 </div>
                 <DialogFooter>
-                  <Button variant="outline" onClick={() => setIsAddCurrencyOpen(false)}>
+                  <Button
+                    variant="outline"
+                    onClick={() => setIsAddCurrencyOpen(false)}
+                  >
                     Cancel
                   </Button>
                   <Button onClick={handleAddCurrency} disabled={isLoading}>
@@ -367,7 +429,9 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
               </DialogContent>
             </Dialog>
           </CardTitle>
-          <CardDescription>Manage cryptocurrency configurations for payment processing</CardDescription>
+          <CardDescription>
+            Manage cryptocurrency configurations for payment processing
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {isLoading ? (
@@ -385,13 +449,22 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
               <TableBody>
                 {currencies.map((currency) => (
                   <TableRow key={currency._id}>
-                    <TableCell className="font-medium">{currency.name}</TableCell>
+                    <TableCell className="font-medium">
+                      {currency.name}
+                    </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <code className="text-sm bg-muted px-2 py-1 rounded">
-                          {currency.walletAddress.slice(0, 10)}...{currency.walletAddress.slice(-6)}
+                          {currency.walletAddress.slice(0, 10)}...
+                          {currency.walletAddress.slice(-6)}
                         </code>
-                        <Button variant="ghost" size="sm" onClick={() => copyToClipboard(currency.walletAddress)}>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() =>
+                            copyToClipboard(currency.walletAddress)
+                          }
+                        >
                           <Copy className="h-4 w-4" />
                         </Button>
                       </div>
@@ -414,8 +487,8 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
                               active: currency.active,
                               createdAt: currency.createdAt,
                               updatedAt: currency.updatedAt,
-                            })
-                            setIsEditCurrencyOpen(true)
+                            });
+                            setIsEditCurrencyOpen(true);
                           }}
                         >
                           <Pencil className="h-4 w-4" />
@@ -423,7 +496,9 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => handleToggleCurrencyStatus(currency._id)}
+                          onClick={() =>
+                            handleToggleCurrencyStatus(currency._id)
+                          }
                         >
                           {currency.active ? "Deactivate" : "Activate"}
                         </Button>
@@ -448,7 +523,9 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Edit Cryptocurrency</DialogTitle>
-            <DialogDescription>Update the cryptocurrency configuration.</DialogDescription>
+            <DialogDescription>
+              Update the cryptocurrency configuration.
+            </DialogDescription>
           </DialogHeader>
           {editCurrency && (
             <div className="space-y-4 py-4">
@@ -457,7 +534,11 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
                 <Input
                   id="edit-currency-name"
                   value={editCurrency.name}
-                  onChange={(e) => setEditCurrency(prev => prev ? { ...prev, name: e.target.value } : null)}
+                  onChange={(e) =>
+                    setEditCurrency((prev) =>
+                      prev ? { ...prev, name: e.target.value } : null
+                    )
+                  }
                   placeholder="e.g., Bitcoin"
                 />
               </div>
@@ -466,17 +547,24 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
                 <Input
                   id="edit-wallet-address"
                   value={editCurrency.walletAddress}
-                  onChange={(e) => setEditCurrency(prev => prev ? { ...prev, walletAddress: e.target.value } : null)}
+                  onChange={(e) =>
+                    setEditCurrency((prev) =>
+                      prev ? { ...prev, walletAddress: e.target.value } : null
+                    )
+                  }
                   placeholder="Enter wallet address"
                 />
               </div>
             </div>
           )}
           <DialogFooter>
-            <Button variant="outline" onClick={() => {
-              setIsEditCurrencyOpen(false)
-              setEditCurrency(null)
-            }}>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setIsEditCurrencyOpen(false);
+                setEditCurrency(null);
+              }}
+            >
               Cancel
             </Button>
             <Button onClick={handleEditCurrency} disabled={isLoading}>
@@ -485,8 +573,6 @@ export function PaymentMethodsTab({ onSettingsChange }: PaymentMethodsTabProps) 
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
-    
     </div>
-  )
+  );
 }

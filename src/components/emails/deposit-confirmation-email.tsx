@@ -62,7 +62,7 @@ export function DepositConfirmationEmail({
             fontWeight: "600",
           }}
         >
-          SecureBank
+          Stellarone Holdings
         </h1>
       </div>
 
@@ -249,8 +249,8 @@ export function DepositConfirmationEmail({
         </div>
 
         <p style={{ color: "#71717a", fontSize: "14px", lineHeight: "1.5" }}>
-          Thank you for banking with SecureBank. If you have any questions,
-          please don't hesitate to contact us.
+          Thank you for banking with Stellarone Holdings. If you have any
+          questions, please don't hesitate to contact us.
         </p>
 
         <div

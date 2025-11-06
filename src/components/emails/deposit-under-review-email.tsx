@@ -60,7 +60,7 @@ export function DepositUnderReviewEmail({
             fontWeight: "600",
           }}
         >
-          SecureBank
+          Stellarone Holdings
         </h1>
       </div>
 

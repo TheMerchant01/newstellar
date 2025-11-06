@@ -62,7 +62,7 @@ export function LoanApprovalEmail({
             fontWeight: "600",
           }}
         >
-          SecureBank
+          Stellarone Holdings
         </h1>
       </div>
 
@@ -278,8 +278,8 @@ export function LoanApprovalEmail({
         </p>
 
         <p style={{ color: "#71717a", fontSize: "14px", lineHeight: "1.5" }}>
-          Thank you for choosing SecureBank for your financing needs. We look
-          forward to serving you.
+          Thank you for choosing Stellarone Holdings for your financing needs.
+          We look forward to serving you.
         </p>
 
         <div

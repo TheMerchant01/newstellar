@@ -1,37 +1,52 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Building2, Mail, Phone, MapPin } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react";
+import { Building2, Mail, Phone, MapPin } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // Define the props interface
 interface GeneralSettingsTabProps {
   onSettingsChange: () => void;
 }
 
-export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps) {
+export function GeneralSettingsTab({
+  onSettingsChange,
+}: GeneralSettingsTabProps) {
   const [settings, setSettings] = useState({
-    appName: "SecureBank Pro",
-    appDescription: "Professional banking solution for modern financial institutions",
-    companyName: "SecureBank Financial Services",
-    contactEmail: "admin@securebank.com",
-    supportEmail: "support@securebank.com",
+    appName: "Stellarone Holdings Pro",
+    appDescription:
+      "Professional banking solution for modern financial institutions",
+    companyName: "Stellarone Holdings Financial Services",
+    contactEmail: "admin@stellarone-holdings.com",
+    supportEmail: "support@stellarone-holdings.com",
     phoneNumber: "+1 (555) 123-4567",
     address: "123 Financial District, New York, NY 10001",
     timezone: "America/New_York",
     currency: "USD",
     language: "en",
     businessHours: "9:00 AM - 5:00 PM EST",
-  })
+  });
 
   const handleInputChange = (field: keyof typeof settings, value: string) => {
-    setSettings((prev) => ({ ...prev, [field]: value }))
-    onSettingsChange()
-  }
+    setSettings((prev) => ({ ...prev, [field]: value }));
+    onSettingsChange();
+  };
 
   const timezones = [
     { value: "America/New_York", label: "Eastern Time (ET)" },
@@ -39,7 +54,7 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
     { value: "America/Denver", label: "Mountain Time (MT)" },
     { value: "America/Los_Angeles", label: "Pacific Time (PT)" },
     { value: "UTC", label: "UTC" },
-  ]
+  ];
 
   const currencies = [
     { value: "USD", label: "US Dollar (USD)" },
@@ -47,7 +62,7 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
     { value: "GBP", label: "British Pound (GBP)" },
     { value: "CAD", label: "Canadian Dollar (CAD)" },
     { value: "AUD", label: "Australian Dollar (AUD)" },
-  ]
+  ];
 
   const languages = [
     { value: "en", label: "English" },
@@ -55,7 +70,7 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
     { value: "fr", label: "French" },
     { value: "de", label: "German" },
     { value: "it", label: "Italian" },
-  ]
+  ];
 
   return (
     <div className="space-y-6">
@@ -65,7 +80,9 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
             <Building2 className="h-5 w-5" />
             Application Settings
           </CardTitle>
-          <CardDescription>Configure basic information about your banking application</CardDescription>
+          <CardDescription>
+            Configure basic information about your banking application
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -83,7 +100,9 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
               <Input
                 id="company-name"
                 value={settings.companyName}
-                onChange={(e) => handleInputChange("companyName", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("companyName", e.target.value)
+                }
                 placeholder="Enter company name"
               />
             </div>
@@ -94,7 +113,9 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
             <Textarea
               id="app-description"
               value={settings.appDescription}
-              onChange={(e) => handleInputChange("appDescription", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("appDescription", e.target.value)
+              }
               placeholder="Enter application description"
               rows={3}
             />
@@ -108,7 +129,9 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
             <Mail className="h-5 w-5" />
             Contact Information
           </CardTitle>
-          <CardDescription>Configure contact details for your banking institution</CardDescription>
+          <CardDescription>
+            Configure contact details for your banking institution
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -121,7 +144,9 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
                   type="email"
                   className="pl-8"
                   value={settings.contactEmail}
-                  onChange={(e) => handleInputChange("contactEmail", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("contactEmail", e.target.value)
+                  }
                   placeholder="admin@yourbank.com"
                 />
               </div>
@@ -135,7 +160,9 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
                   type="email"
                   className="pl-8"
                   value={settings.supportEmail}
-                  onChange={(e) => handleInputChange("supportEmail", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("supportEmail", e.target.value)
+                  }
                   placeholder="support@yourbank.com"
                 />
               </div>
@@ -152,7 +179,9 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
                   type="tel"
                   className="pl-8"
                   value={settings.phoneNumber}
-                  onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("phoneNumber", e.target.value)
+                  }
                   placeholder="+1 (555) 123-4567"
                 />
               </div>
@@ -162,7 +191,9 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
               <Input
                 id="business-hours"
                 value={settings.businessHours}
-                onChange={(e) => handleInputChange("businessHours", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("businessHours", e.target.value)
+                }
                 placeholder="9:00 AM - 5:00 PM EST"
               />
             </div>
@@ -188,13 +219,18 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
       <Card>
         <CardHeader>
           <CardTitle>Regional Settings</CardTitle>
-          <CardDescription>Configure timezone, currency, and language preferences</CardDescription>
+          <CardDescription>
+            Configure timezone, currency, and language preferences
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label htmlFor="timezone">Timezone</Label>
-              <Select value={settings.timezone} onValueChange={(value) => handleInputChange("timezone", value)}>
+              <Select
+                value={settings.timezone}
+                onValueChange={(value) => handleInputChange("timezone", value)}
+              >
                 <SelectTrigger id="timezone">
                   <SelectValue placeholder="Select timezone" />
                 </SelectTrigger>
@@ -210,7 +246,10 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
 
             <div className="space-y-2">
               <Label htmlFor="currency">Default Currency</Label>
-              <Select value={settings.currency} onValueChange={(value) => handleInputChange("currency", value)}>
+              <Select
+                value={settings.currency}
+                onValueChange={(value) => handleInputChange("currency", value)}
+              >
                 <SelectTrigger id="currency">
                   <SelectValue placeholder="Select currency" />
                 </SelectTrigger>
@@ -226,7 +265,10 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
 
             <div className="space-y-2">
               <Label htmlFor="language">Default Language</Label>
-              <Select value={settings.language} onValueChange={(value) => handleInputChange("language", value)}>
+              <Select
+                value={settings.language}
+                onValueChange={(value) => handleInputChange("language", value)}
+              >
                 <SelectTrigger id="language">
                   <SelectValue placeholder="Select language" />
                 </SelectTrigger>
@@ -243,5 +285,5 @@ export function GeneralSettingsTab({ onSettingsChange }: GeneralSettingsTabProps
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
